@@ -1,8 +1,9 @@
+import os
 import pymongo
 from typing import Dict
 
 class Database:
-    URI = "mongodb://localhost:27017/pricing"
+    URI = os.environ.get("MONGOLAB_URI")
     DATABASE = pymongo.MongoClient(URI).get_database()
 
     @staticmethod
