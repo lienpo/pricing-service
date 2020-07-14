@@ -8,7 +8,9 @@ from views.users import user_blueprint
 
 app = Flask(__name__)
 app.secret_key = "zd7FfDE4kzswDB9@nA85KAkaBSpgzxS"
-app.config.from_object('config')
+app.config.update(
+    ADMIN=os.environ.get('ADMIN')
+)
 
 
 app.register_blueprint(alert_blueprint, url_prefix="/alerts")
