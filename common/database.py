@@ -4,11 +4,12 @@ from typing import Dict
 
 class Database:
     URI = os.environ.get("MONGOLAB_URI")
-    DATABASE = pymongo.MongoClient(URI).get_database()
+    DATABASE = None
 
     @staticmethod
     def insert(collection: str, data: Dict):
-        Database.DATABASE[collection].insert(data)
+        client = pymongo.MongoClient(Database.URI)
+        Database.DATABASE = client.get_default_database()
 
     @staticmethod
     def find(collection: str, query: Dict) -> pymongo.cursor:
