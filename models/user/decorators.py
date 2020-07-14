@@ -1,6 +1,7 @@
 import functools
 from typing import Callable
-from flask import session, flash, redirect, url_for, request
+from flask import session, flash, redirect, url_for, request, current_app
+
 
 def requires_login(f: Callable) -> Callable:
     @functools.wraps(f)
@@ -11,6 +12,7 @@ def requires_login(f: Callable) -> Callable:
         return f(*args, **kwargs)
     return decorated_function
 
+
 def requires_admin(f: Callable) ->  Callable:
     @functools.wraps(f)
     def decorated_functions(*args, **kwargs):
@@ -18,4 +20,5 @@ def requires_admin(f: Callable) ->  Callable:
             flash('You need to be an administrator to access this page.', 'danger')
             return redirect(url_for('users.login_user'))
         return f(*args, **kwargs)
+
     return decorated_functions

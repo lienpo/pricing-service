@@ -29,7 +29,7 @@ def new_alert():
         item.load_price()
         item.save_to_mongo()
 
-        Alert(alert_name, item._id, price_limit).save_to_mongo()
+        Alert(alert_name, item._id, price_limit, session['email']).save_to_mongo()
 
     return render_template('alerts/new_alert.html')
 

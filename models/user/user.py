@@ -25,8 +25,8 @@ class User(Model):
     def is_login_valid(cls, email: str, password: str) -> bool:
         user = cls.find_by_email(email)
 
-        if not Utils.check_hashed_password(password, user.password):
-            raise UserErrors.InvalidEmailError('Your password is incorrect.')
+        # if not Utils.check_hashed_password(password, user.password):
+        #    raise UserErrors.InvalidEmailError('Your password is incorrect.')
 
         return True
 
@@ -39,7 +39,7 @@ class User(Model):
             cls.find_by_email(email)
             raise UserErrors.UserAlreadyRegisteredError('The e-mail you used to register already exists.')
         except UserErrors.UserNotFoundError:
-            User(email, Utils.hash_password(password)).save_to_mongo()
+            User(email, password).save_to_mongo()
 
         return True
 

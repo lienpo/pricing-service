@@ -3,8 +3,8 @@ import pymongo
 from typing import Dict
 
 class Database:
-    URI = os.environ.get("MONGOLAB_URI")
-    DATABASE = None
+    URI = "mongodb://localhost/pricing"
+    DATABASE = pymongo.MongoClient(URI).get_default_database()
 
     @staticmethod
     def insert(collection: str, data: Dict):
