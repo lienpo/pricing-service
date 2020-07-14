@@ -2,6 +2,7 @@ import os
 import pymongo
 from typing import Dict
 
+
 class Database:
     URI = os.environ.get("MONGOLAB_URI")
     DATABASE = None
